@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">DaggerSample</string>
+    <string name="title">Examen Dagger Sample</string>
+    <string name="enter_number">Enter Number Here</string>
+    <string name="submit">Submit</string>
+</resources>

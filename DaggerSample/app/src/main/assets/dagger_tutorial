@@ -1,0 +1,128 @@
+Dagger2
+
+What is DI
+ans: when we are planing build large application (Dependency injection )Dagger and Butterknife
+   1>readable
+   2>expendable
+   3>maintainable
+   4>easy to test
+what are annotations?
+annotation in java are used to provide additional information.annotation can be associated with
+classes method field and even other annotations.they can also be accessed during the runtime.
+
+what are annotation processors?
+annotation processors generate the code during the compile time.
+Daggers 2 does the code generation at the compile time using annotation processors.
+
+Daggers 2 annotations
+1>@Provides
+2>@Module
+3>@Inject
+4>@Component
+
+Singleton annotation
+This annotation tells dagger to  create only one instance of the object(dependency)
+
+@Singleton annotation
+
+1> @Module and @Provides Annotation
+   we use them to create a mechanism for providing dependencies.
+
+    a> @Module: this annotation,marks the modules/classes.
+   Example:
+   @Module
+  public class MemberDataModule{
+  @Provides
+  @Singleton
+  MemberDataManager provideMemberDataManager(){
+     return new MemberDataManager ;
+   }
+  }
+
+  b>@Provides
+   This annotation marks the methods inside the modules, which provides the dependencies.
+   Example:
+     public class MemberDataModule{
+     @Provides
+     @Singleton
+    MemberDataManager provideMemberDataManager(){
+     return new MemberDataManager ;
+   }
+  }
+
+2>@Inject and @Component Annotations
+
+  a> @Inject
+    This annotation is for requesting dependencies.
+    @Inject annotation Example
+
+    import javax.inject.inject;
+    public class MainActivity extends AppCompatActivity{
+     @Inject
+     MemberDataManger memberDataManger;
+     private Edittext memberId;
+     private Button sumbitButton;
+
+     @override
+     protected void onCreate(Bundle saveInstanceState){
+     super.onCreate(saveInstanceState);
+     setContentView(R.layout.activity_main);
+     App.app().getMemberAppComponent().inject(this);
+  }
+
+   @Inject
+    This annotation tells the Dagger about the dependencies needed to be transferred to      the dependent.
+   we can use @Inject annotation in three fields.
+   @Inject
+   • Constructor Injection
+   • Field Injection
+   • Method Injection
+
+3>@Component
+  This annotation is used to build the interface which acts as a bridge between dependent   and dependencies
+  @Component annotation Example
+
+  @Singleton
+  @Component(modules = MemberDataManger.class)
+  public interface MemberAppComponent{
+   void inject(MainActivity mainActivity);
+   }
+4>@Singleton
+  This annotation tells dagger to  create only one instance of the object(dependency)
+  @Singleton Example
+
+  public class MemberDataModule{
+     @Provides
+     @Singleton
+    MemberDataManager provideMemberDataManager(){
+     return new MemberDataManager ;
+   }
+  }
+
+
+@Singleton Theoretically a  singleton candidate must satisfy these requirements:
+  a>That object has concurrent access form other parts of the application during the       application lifetime.
+  b> Access to the object will be requested from multiple parts of the system.
+  c> There can be only one object.
+
+@Singleton
+  a>@Singleton annotation if for creating singletons, that’s true. But it’s not the exact    singleton we create in java.
+
+@Singleton
+  a>In dagger 2 @Singleton makes your class a single instance in your dependencies graph   (it means that this instance will be "singleton" as long as Component object exists).  (We will learn about components later in this course
+
+@Singleton
+ a>Every time , you’re injecting @Singleton annotated class (with @Inject annotation)It will be the same instance as long as you inject it from same Component.
+
+There are some arguments about dagger 2 singletons. I added this note to make it much clearer for you.
+ a> @Singleton annotation if for creating singletons, that’s true. But it’s not the exact     singleton we create in java.
+ b> In dagger 2 @Singleton makes your class a single instance in your dependencies graph    (it means that this instance will be "singleton" as long as Component object exists).   (We will learn about components later in this course)
+ c> Every time, you’re injecting @Singleton   annotated class (with @Inject annotation)
+    it will be the same instance as long as you inject it from the same Component.
+
+
+Example of Dagger
+
+1> Create poja class
+  public class Member{
+
