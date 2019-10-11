@@ -11,6 +11,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+//foreground service with start_sticky
 public class MainActivity extends AppCompatActivity {
     //create the intent for calling service
     Intent serviceIntent;
